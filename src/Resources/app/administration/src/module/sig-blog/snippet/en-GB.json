@@ -1,0 +1,16 @@
+{
+    "sig-blog": {
+        "general": {
+            "mainMenuItemGeneral": "Blog by Signundsinn",
+            "descriptionTextModule": "Custom blog module by Signundsinn"
+        },
+        "posts": {
+            "button": {
+                "create": "Create New Post",
+                "save": "Save",
+                "cancel": "Cancel",
+                "delete": "Delete"
+            }  
+        }
+    }
+}

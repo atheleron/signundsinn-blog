@@ -1,0 +1,53 @@
+{% block sig_blog_create_page %}
+    <sw-page class="sig-blog-create">
+        <template slot="smart-bar-actions">
+            {% block sig_blog_posts_smart_bar_actions_cancel %}
+                <sw-button @click="cancelPost" :variant="btnType.status">
+                    {{ btnType.text }}
+                </sw-button>
+            {% endblock %}
+
+            {% block sig_blog_posts_smart_bar_actions_add %}
+                <sw-button @click="savePost()" variant="primary">
+                    {{ $tc('sig-blog.posts.button.save') }}
+                </sw-button>
+            {% endblock %}
+        </template>
+        <template #content>
+            <sw-card-view>
+                <sw-container columns="3fr 1fr" gap="20px">
+                    <sw-card positionIdentifier="content">
+
+                        <sw-text-field v-model="blog.title" :required="true" :error="blogTitleError">
+                            <template v-slot:label>Title</template>
+                        </sw-text-field>
+
+                        <sw-text-editor
+                            v-model="blog.content"
+                            :is-inline-edit="false"
+                            :required="true"
+                            :error="blogContentError"
+                        >
+                            <template v-slot:label>Content</template>
+                        </sw-text-editor>
+
+                    </sw-card>
+                    <sw-card positionIdentifier="sidebar">
+                        <sw-switch-field v-model="blog.status" :label="blog.status ? 'Published' : 'Draft'"></sw-switch-field>
+                        {# Datepicker #}
+                        <sw-datepicker label="Published Date" v-model="blog.publishedAt" />
+                        
+                        <sw-single-select
+                            v-model="blog.authorId"
+                            label="Author"
+                            :options="[{value: currentUser.id, label: currentUser.firstName}]"
+                            :error="blogAuthorIdError"
+                        >
+                        </sw-single-select>
+                        
+                    </sw-card>
+                </sw-container>
+             </sw-card-view>    
+        </template>
+    </sw-page>
+{% endblock %}

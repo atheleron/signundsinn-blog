@@ -1,0 +1,36 @@
+{% block sig_blog_posts_page %}
+    <sw-page class="sig-blog-posts">
+        <template slot="smart-bar-actions">
+            {% block sig_blog_posts_smart_bar_actions_add %}
+                <sw-button :routerLink="{ name: 'sig.blog.create' }" variant="primary">
+                    {{ $tc('sig-blog.posts.button.create') }}
+                </sw-button>
+            {% endblock %}
+        </template>
+        <template slot="content">
+            <sw-entity-listing
+                v-if="blog"
+                :items="blog"
+                :repository="blogRepository"
+                :columns="columns"
+                detailRoute="sig.blog.detail"
+                >
+                <template #column-author="{ item }">
+                    {{ item.author.firstName }} {{ item.author.lastName }}
+                </template>
+                
+                <template #column-publishedAt="{ item }">
+                    {{ item.publishedAt|date }}
+                </template>
+
+                <template #column-createdAt="{ item }">
+                    {{ item.createdAt|date  }}
+                </template>
+
+                <template #column-updatedAt="{ item }">
+                    {{ item.updatedAt|date  }}
+                </template>
+            </sw-entity-listing>
+        </template>
+    </sw-page>
+{% endblock %}
